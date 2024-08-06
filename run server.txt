@@ -1,0 +1,1 @@
+cd "C:\Users\Mohd\Desktop\WebControl" && node server.js

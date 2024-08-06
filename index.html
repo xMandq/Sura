@@ -77,22 +77,27 @@
             background-color: #ffffff66;
         }
         .accounts {
-            margin-bottom: 20px;
+        margin-bottom: 20px;
         }
+
         .accounts ul {
             list-style: none;
             padding: 0;
         }
+
         .accounts li {
             padding: 5px;
             background-color: rgba(255, 255, 255, 0.2);
             margin: 5px 0;
             border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.3s;
         }
-        .accounts li:hover {
-            background-color: rgba(255, 255, 255, 0.4);
+
+        .accounts li:hover, .accounts li.active {
+            background-color: rgba(255, 255, 255, 0.5);
         }
+
         .account-actions button {
             width: 100%;
             padding: 10px;
@@ -116,18 +121,18 @@
             text-align: center;
         }
         .project-title {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 24px;
-    font-weight: bold;
-    background: linear-gradient(90deg, #ff6b6b, #ffde7d, #6bd1ff, #ff6b6b);
-    background-clip: text; /* Standard property */
-    -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari) */
-    -webkit-text-fill-color: transparent; /* For Webkit browsers */
-    background-size: 200% 200%;
-    animation: gradientAnimation 5s linear infinite;
-}
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(90deg, #ff6b6b, #ffde7d, #6bd1ff, #ff6b6b);
+            background-clip: text; /* Standard property */
+            -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari) */
+            -webkit-text-fill-color: transparent; /* For Webkit browsers */
+            background-size: 200% 200%;
+            animation: gradientAnimation 5s linear infinite;
+        }
 
         @keyframes gradientAnimation {
             0% {
@@ -148,6 +153,7 @@
             <h2>Accounts</h2>
             <ul id="account-list"></ul>
         </div>
+        
         <div class="account-actions">
             <button onclick="addAccount()">Add Account</button>
             <button onclick="removeAccount()">Remove Account</button>
@@ -163,7 +169,7 @@
         <div class="control-panel">
             <div class="place-id-input" id="place-id-input" style="display: none;">
                 <label for="block-id">Block ID:</label>
-                <input type="text" id="block-id" value="1" />
+                <input type="text" id="block-id" value="1" onchange="updateBlockId()" />
             </div>
             <div id="controls"></div>
         </div>
@@ -171,20 +177,24 @@
 
     <script>
         const accounts = [];
+        let activeAccountIndex = null;
 
         function addAccount() {
             const accountName = prompt("Enter account name:");
             if (accountName) {
-                accounts.push(accountName);
+                accounts.push({ name: accountName, blockId: '1' });
                 updateAccountList();
             }
         }
 
         function removeAccount() {
             const accountName = prompt("Enter account name to remove:");
-            const index = accounts.indexOf(accountName);
+            const index = accounts.findIndex(account => account.name === accountName);
             if (index > -1) {
                 accounts.splice(index, 1);
+                if (activeAccountIndex === index) {
+                    activeAccountIndex = null;
+                }
                 updateAccountList();
             } else {
                 alert("Account not found.");
@@ -194,17 +204,26 @@
         function updateAccountList() {
             const accountList = document.getElementById('account-list');
             accountList.innerHTML = '';
-            accounts.forEach(account => {
+            accounts.forEach((account, index) => {
                 const listItem = document.createElement('li');
-                listItem.textContent = account;
-                listItem.onclick = () => switchAccount(account);
+                listItem.textContent = account.name;
+                listItem.classList.toggle('active', index === activeAccountIndex);
+                listItem.onclick = () => setActiveAccount(index);
                 accountList.appendChild(listItem);
             });
         }
 
-        function switchAccount(account) {
-            alert(`Switched to account: ${account}`);
-            // Implement additional logic to switch the account here
+        function setActiveAccount(index) {
+            activeAccountIndex = index;
+            const account = accounts[activeAccountIndex];
+            document.getElementById('block-id').value = account.blockId;
+            updateAccountList();
+        }
+
+        function updateBlockId() {
+            if (activeAccountIndex !== null) {
+                accounts[activeAccountIndex].blockId = document.getElementById('block-id').value;
+            }
         }
 
         async function logMovement(key) {
@@ -324,8 +343,7 @@
             }
         }
 
-        // Initialize with a default mode
-        switchMode('movement');
+        switchMode('movement'); // Default mode
     </script>
 </body>
 </html>

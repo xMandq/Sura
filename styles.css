@@ -1,0 +1,192 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+.sidebar {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.top-bar button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.top-bar button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.control-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(5, 60px);
+    gap: 10px;
+    align-items: center;
+    justify-items: center;
+    width: 100%;
+}
+
+.controls button {
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controls button:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.1);
+}
+
+.bot-image {
+    width: 40px;
+    height: 40px;
+}
+
+.accounts {
+    margin-bottom: 20px;
+}
+
+.accounts ul {
+    list-style: none;
+    padding: 0;
+}
+
+.accounts li {
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.accounts li:hover, .accounts li.active {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.account-actions button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 5px 0;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.account-actions button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.place-id-input {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.place-id-input input {
+    width: 60px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.project-title {
+    font-size: 0;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* for pcs */
+
+@media (min-width: 990px) {
+    .project-title {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        font-weight: bold;
+        background: linear-gradient(90deg, #ff6b6b, #ffde7d, #6bd1ff, #ff6b6b);
+        background-clip: text; /* Standard property */
+        -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari) */
+        -webkit-text-fill-color: transparent; /* For Webkit browsers */
+        background-size: 200% 200%;
+        animation: gradientAnimation 5s linear infinite;
+    }
+    body {
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 25%;
+    }
+    .main-content {
+        width: 75%;
+    }
+}

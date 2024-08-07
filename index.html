@@ -3,149 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Control Interface</title>
-    <style>
-        body {
-            display: flex;
-            height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            font-family: Arial, sans-serif;
-            color: #fff;
-        }
-        .sidebar {
-            width: 25%;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .main-content {
-            width: 75%;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-        }
-        .top-bar button {
-            margin: 0 10px;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: #fff;
-            font-weight: bold;
-        }
-        .control-panel {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .controls {
-            display: grid;
-            grid-template-columns: repeat(5, 50px);
-            grid-template-rows: repeat(5, 50px);
-            gap: 10px;
-            align-items: center;
-            justify-items: center;
-        }
-        .controls button {
-            font-size: 18px;
-            width: 50px;
-            height: 50px;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            background-color: #ffffff33;
-            border-radius: 5px;
-            color: #fff;
-            transition: background-color 0.3s;
-        }
-        .controls button:hover {
-            background-color: #ffffff66;
-        }
-        .accounts {
-        margin-bottom: 20px;
-        }
-
-        .accounts ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .accounts li {
-            padding: 5px;
-            background-color: rgba(255, 255, 255, 0.2);
-            margin: 5px 0;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .accounts li:hover, .accounts li.active {
-            background-color: rgba(255, 255, 255, 0.5);
-        }
-
-        .account-actions button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            margin: 5px 0;
-            border-radius: 5px;
-            background-color: rgba(255, 255, 255, 0.3);
-            color: #fff;
-            font-weight: bold;
-        }
-        .place-id-input {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .place-id-input input {
-            width: 50px;
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-            text-align: center;
-        }
-        .project-title {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            font-weight: bold;
-            background: linear-gradient(90deg, #ff6b6b, #ffde7d, #6bd1ff, #ff6b6b);
-            background-clip: text; /* Standard property */
-            -webkit-background-clip: text; /* For Webkit browsers (Chrome, Safari) */
-            -webkit-text-fill-color: transparent; /* For Webkit browsers */
-            background-size: 200% 200%;
-            animation: gradientAnimation 5s linear infinite;
-        }
-
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-    </style>
+    <title>Sura</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="sidebar">
@@ -163,7 +22,7 @@
         <div class="project-title">Project Sura v0.1</div>
         <div class="top-bar">
             <button onclick="switchMode('movement')">Movement</button>
-            <button onclick="switchMode('punch')">Punching</button>
+            <button onclick="switchMode('break')">Punching</button>
             <button onclick="switchMode('place')">Placing</button>
         </div>
         <div class="control-panel">
@@ -267,83 +126,35 @@
                 <div class="controls">
                     <div></div><div></div><button onclick="logMovement('W')">W</button><div></div><div></div>
                     <div></div><button onclick="logMovement('A')">A</button><button onclick="logMovement('S')">S</button><button onclick="logMovement('D')">D</button><div></div>
-                    <div></div><div></div><div></div><div></div><div></div>
-                </div>
-                `;
-            } else if (mode === 'punch') {
-                placeIdInput.style.display = 'none';
-                controlsDiv.innerHTML = `
-                    <div class="controls">
-                        <button onclick="logAction('break_-2_-2')">-2,-2</button>
-                        <button onclick="logAction('break_-1_-2')">-1,-2</button>
-                        <button onclick="logAction('break_0_-2')">0,-2</button>
-                        <button onclick="logAction('break_1_-2')">1,-2</button>
-                        <button onclick="logAction('break_2_-2')">2,-2</button>
-
-                        <button onclick="logAction('break_-2_-1')">-2,-1</button>
-                        <button onclick="logAction('break_-1_-1')">-1,-1</button>
-                        <button onclick="logAction('break_0_-1')">0,-1</button>
-                        <button onclick="logAction('break_1_-1')">1,-1</button>
-                        <button onclick="logAction('break_2_-1')">2,-1</button>
-
-                        <button onclick="logAction('break_-2_0')">-2,0</button>
-                        <button onclick="logAction('break_-1_0')">-1,0</button>
-                        <button onclick="logAction('break_0_0')">0,0</button>
-                        <button onclick="logAction('break_1_0')">1,0</button>
-                        <button onclick="logAction('break_2_0')">2,0</button>
-
-                        <button onclick="logAction('break_-2_1')">-2,1</button>
-                        <button onclick="logAction('break_-1_1')">-1,1</button>
-                        <button onclick="logAction('break_0_1')">0,1</button>
-                        <button onclick="logAction('break_1_1')">1,1</button>
-                        <button onclick="logAction('break_2_1')">2,1</button>
-
-                        <button onclick="logAction('break_-2_2')">-2,2</button>
-                        <button onclick="logAction('break_-1_2')">-1,2</button>
-                        <button onclick="logAction('break_0_2')">0,2</button>
-                        <button onclick="logAction('break_1_2')">1,2</button>
-                        <button onclick="logAction('break_2_2')">2,2</button>
-                    </div>
-                `;
+                    <div></div><div></div><div></div><div></div>
+                </div>`;
             } else if (mode === 'place') {
                 placeIdInput.style.display = 'block';
                 controlsDiv.innerHTML = `
-                    <div class="controls">
-                        <button onclick="logAction('place_-2_-2_' + document.getElementById('block-id').value)">-2,-2</button>
-                        <button onclick="logAction('place_-1_-2_' + document.getElementById('block-id').value)">-1,-2</button>
-                        <button onclick="logAction('place_0_-2_' + document.getElementById('block-id').value)">0,-2</button>
-                        <button onclick="logAction('place_1_-2_' + document.getElementById('block-id').value)">1,-2</button>
-                        <button onclick="logAction('place_2_-2_' + document.getElementById('block-id').value)">2,-2</button>
-
-                        <button onclick="logAction('place_-2_-1_' + document.getElementById('block-id').value)">-2,-1</button>
-                        <button onclick="logAction('place_-1_-1_' + document.getElementById('block-id').value)">-1,-1</button>
-                        <button onclick="logAction('place_0_-1_' + document.getElementById('block-id').value)">0,-1</button>
-                        <button onclick="logAction('place_1_-1_' + document.getElementById('block-id').value)">1,-1</button>
-                        <button onclick="logAction('place_2_-1_' + document.getElementById('block-id').value)">2,-1</button>
-
-                        <button onclick="logAction('place_-2_0_' + document.getElementById('block-id').value)">-2,0</button>
-                        <button onclick="logAction('place_-1_0_' + document.getElementById('block-id').value)">-1,0</button>
-                        <button onclick="logAction('place_0_0_' + document.getElementById('block-id').value)">0,0</button>
-                        <button onclick="logAction('place_1_0_' + document.getElementById('block-id').value)">1,0</button>
-                        <button onclick="logAction('place_2_0_' + document.getElementById('block-id').value)">2,0</button>
-
-                        <button onclick="logAction('place_-2_1_' + document.getElementById('block-id').value)">-2,1</button>
-                        <button onclick="logAction('place_-1_1_' + document.getElementById('block-id').value)">-1,1</button>
-                        <button onclick="logAction('place_0_1_' + document.getElementById('block-id').value)">0,1</button>
-                        <button onclick="logAction('place_1_1_' + document.getElementById('block-id').value)">1,1</button>
-                        <button onclick="logAction('place_2_1_' + document.getElementById('block-id').value)">2,1</button>
-
-                        <button onclick="logAction('place_-2_2_' + document.getElementById('block-id').value)">-2,2</button>
-                        <button onclick="logAction('place_-1_2_' + document.getElementById('block-id').value)">-1,2</button>
-                        <button onclick="logAction('place_0_2_' + document.getElementById('block-id').value)">0,2</button>
-                        <button onclick="logAction('place_1_2_' + document.getElementById('block-id').value)">1,2</button>
-                        <button onclick="logAction('place_2_2_' + document.getElementById('block-id').value)">2,2</button>
-                    </div>
-                `;
+                <div class="controls">
+                    <button onclick="logAction('place_0_0')"></button><button onclick="logAction('place_1_0')"></button><button onclick="logAction('place_2_0')"></button><button onclick="logAction('place_3_0')"></button><button onclick="logAction('place_4_0')"></button>
+                    <button onclick="logAction('place_0_1')"></button><button onclick="logAction('place_1_1')"></button><button onclick="logAction('place_2_1')"></button><button onclick="logAction('place_3_1')"></button><button onclick="logAction('place_4_1')"></button>
+                    <button onclick="logAction('place_0_2')"></button><button onclick="logAction('place_1_2')"></button><button onclick="logAction('place_2_2')"><img src="bot.png" alt="Bot" class="bot-image" /></button><button onclick="logAction('place_3_2')"></button><button onclick="logAction('place_4_2')"></button>
+                    <button onclick="logAction('place_0_3')"></button><button onclick="logAction('place_1_3')"></button><button onclick="logAction('place_2_3')"></button><button onclick="logAction('place_3_3')"></button><button onclick="logAction('place_4_3')"></button>
+                    <button onclick="logAction('place_0_4')"></button><button onclick="logAction('place_1_4')"></button><button onclick="logAction('place_2_4')"></button><button onclick="logAction('place_3_4')"></button><button onclick="logAction('place_4_4')"></button>
+                </div>`;
+            } else if (mode === 'break') {
+                placeIdInput.style.display = 'none';
+                controlsDiv.innerHTML = `
+                <div class="controls">
+                    <button onclick="logAction('break_0_0')"></button><button onclick="logAction('break_1_0')"></button><button onclick="logAction('break_2_0')"></button><button onclick="logAction('break_3_0')"></button><button onclick="logAction('break_4_0')"></button>
+                    <button onclick="logAction('break_0_1')"></button><button onclick="logAction('break_1_1')"></button><button onclick="logAction('break_2_1')"></button><button onclick="logAction('break_3_1')"></button><button onclick="logAction('break_4_1')"></button>
+                    <button onclick="logAction('break_0_2')"></button><button onclick="logAction('break_1_2')"></button><button onclick="logAction('break_2_2')"><img src="bot.png" alt="Bot" class="bot-image" /></button><button onclick="logAction('break_3_2')"></button><button onclick="logAction('break_4_2')"></button>
+                    <button onclick="logAction('break_0_3')"></button><button onclick="logAction('break_1_3')"></button><button onclick="logAction('break_2_3')"></button><button onclick="logAction('break_3_3')"></button><button onclick="logAction('break_4_3')"></button>
+                    <button onclick="logAction('break_0_4')"></button><button onclick="logAction('break_1_4')"></button><button onclick="logAction('break_2_4')"></button><button onclick="logAction('break_3_4')"></button><button onclick="logAction('break_4_4')"></button>
+                </div>`;
             }
         }
 
-        switchMode('movement'); // Default mode
+        window.onload = () => {
+            updateAccountList();
+            switchMode('movement');
+        };
     </script>
 </body>
 </html>

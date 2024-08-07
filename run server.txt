@@ -1,1 +1,3 @@
 cd "C:\Users\Mohd\Desktop\WebControl" && node server.js
+
+http://<your-local-ip>:3000

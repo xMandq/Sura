@@ -28,7 +28,7 @@
         <div class="control-panel">
             <div class="place-id-input" id="place-id-input" style="display: none;">
                 <label for="block-id">Block ID:</label>
-                <input type="text" id="block-id" value="1" onchange="updateBlockId()" />
+                <input type="text" id="block-id" value="1" oninput="updateBlockId()" />
             </div>
             <div id="controls"></div>
         </div>
@@ -81,7 +81,9 @@
 
         function updateBlockId() {
             if (activeAccountIndex !== null) {
-                accounts[activeAccountIndex].blockId = document.getElementById('block-id').value;
+                const newBlockId = document.getElementById('block-id').value;
+                accounts[activeAccountIndex].blockId = newBlockId;
+                console.log('Updated Block ID:', newBlockId);
             }
         }
 
@@ -118,6 +120,7 @@
         function switchMode(mode) {
             const controlsDiv = document.getElementById('controls');
             const placeIdInput = document.getElementById('place-id-input');
+            const blockId = document.getElementById('block-id').value; // Fetch latest block ID
             controlsDiv.innerHTML = '';
 
             if (mode === 'movement') {
@@ -132,11 +135,11 @@
                 placeIdInput.style.display = 'block';
                 controlsDiv.innerHTML = `
                 <div class="controls">
-                    <button onclick="logAction('place_-2_-2')"></button><button onclick="logAction('place_-1_-2')"></button><button onclick="logAction('place_0_-2')"></button><button onclick="logAction('place_1_-2')"></button><button onclick="logAction('place_2_-2')"></button>
-                    <button onclick="logAction('place_-2_-1')"></button><button onclick="logAction('place_-1_-1')"></button><button onclick="logAction('place_0_-1')"></button><button onclick="logAction('place_1_-1')"></button><button onclick="logAction('place_2_-1')"></button>
-                    <button onclick="logAction('place_-2_0')"></button><button onclick="logAction('place_-1_0')"></button><button onclick="logAction('place_0_0')"><img src="bot.png" alt="Bot" class="bot-image" /></button><button onclick="logAction('place_1_0')"></button><button onclick="logAction('place_2_0')"></button>
-                    <button onclick="logAction('place_-2_1')"></button><button onclick="logAction('place_-1_1')"></button><button onclick="logAction('place_0_1')"></button><button onclick="logAction('place_1_1')"></button><button onclick="logAction('place_2_1')"></button>
-                    <button onclick="logAction('place_-2_2')"></button><button onclick="logAction('place_-1_2')"></button><button onclick="logAction('place_0_2')"></button><button onclick="logAction('place_1_2')"></button><button onclick="logAction('place_2_2')"></button>
+                    <button onclick="logAction('place_-2_-2_${blockId}')"></button><button onclick="logAction('place_-1_-2_${blockId}')"></button><button onclick="logAction('place_0_-2_${blockId}')"></button><button onclick="logAction('place_1_-2_${blockId}')"></button><button onclick="logAction('place_2_-2_${blockId}')"></button>
+                    <button onclick="logAction('place_-2_-1_${blockId}')"></button><button onclick="logAction('place_-1_-1_${blockId}')"></button><button onclick="logAction('place_0_-1_${blockId}')"></button><button onclick="logAction('place_1_-1_${blockId}')"></button><button onclick="logAction('place_2_-1_${blockId}')"></button>
+                    <button onclick="logAction('place_-2_0_${blockId}')"></button><button onclick="logAction('place_-1_0_${blockId}')"></button><button onclick="logAction('place_0_0_${blockId}')"><img src="bot.png" alt="Bot" class="bot-image" /></button><button onclick="logAction('place_1_0_${blockId}')"></button><button onclick="logAction('place_2_0_${blockId}')"></button>
+                    <button onclick="logAction('place_-2_1_${blockId}')"></button><button onclick="logAction('place_-1_1_${blockId}')"></button><button onclick="logAction('place_0_1_${blockId}')"></button><button onclick="logAction('place_1_1_${blockId}')"></button><button onclick="logAction('place_2_1_${blockId}')"></button>
+                    <button onclick="logAction('place_-2_2_${blockId}')"></button><button onclick="logAction('place_-1_2_${blockId}')"></button><button onclick="logAction('place_0_2_${blockId}')"></button><button onclick="logAction('place_1_2_${blockId}')"></button><button onclick="logAction('place_2_2_${blockId}')"></button>
                 </div>`;
             } else if (mode === 'break') {
                 placeIdInput.style.display = 'none';

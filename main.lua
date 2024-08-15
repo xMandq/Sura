@@ -1,6 +1,6 @@
 function OnTextOverlay(text)
     if type(text) ~= "string" then
-        text = tostring(text) -- Convert non-string values to string
+        text = tostring(text)
     end
     local var = {}
     var[0] = "OnTextOverlay"

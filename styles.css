@@ -6,6 +6,7 @@ body {
     background: linear-gradient(135deg, #92a7ac, #314fc7);
     font-family: Arial, sans-serif;
     color: #fff;
+    touch-action: manipulation; /* this to stop zoom in when 2x click */
 }
 
 .sidebar {
@@ -188,5 +189,13 @@ body {
     }
     .main-content {
         width: 75%;
+    }
+}
+
+/* phones */
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
     }
 }

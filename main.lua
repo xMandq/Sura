@@ -1,3 +1,15 @@
+function OnTextOverlay(text)
+    if type(text) ~= "string" then
+        text = tostring(text) -- Convert non-string values to string
+    end
+    local var = {}
+    var[0] = "OnTextOverlay"
+    var[1] = text
+    var.netid = -1
+    SendVarlist(var)
+end
+
+
 function getFilePath(fileName)
     return os.getenv("USERPROFILE") .. "\\Desktop\\WebControl\\" .. fileName
 end
@@ -62,7 +74,16 @@ function processAction(action)
     if actionType == "break" then
         hitTile(x, y)
     elseif actionType == "place" then
-        placeTile(x, y, id)
+        id_number = tonumber(id)
+        id_number = GetItemCount(id_number)
+        id_number_count = tonumber(id_number)
+        id_name = tonumber(id)
+        id_name = GetItemInfo(id_name).name
+        if id_number_count < 1 then
+            OnTextOverlay("`9No enough "..id_name.." blocks left")
+        else
+            placeTile(x, y, id)
+        end
     end
 end
 
